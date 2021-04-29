@@ -1,9 +1,11 @@
 #include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "funcs.h"
 
 double integral(double (*f)(double), double a, double b, double eps){
-	int n = 2;
-	double I1 = 0, I2 = 0;
+	int n = 2, iter = 0;
+	double I1, I2 = 0;
 	do{
 		I1 = I2;
 		I2 = 0;
@@ -14,6 +16,11 @@ double integral(double (*f)(double), double a, double b, double eps){
 			I2 += (f(x_1) + f(x_0)) / 2 * (x_1 - x_0);
 		}
 		n <<= 1;
+		++iter;
+		if(iter > 1000){
+		    printf("Can`t converge!");
+		    exit(1);
+		}
 	}while(fabs(I1 - I2) >= eps / 2);
 	return I2;
 }
