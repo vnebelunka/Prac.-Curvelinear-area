@@ -1,11 +1,11 @@
 #include <stdio.h>
 
-double f3(double x);
-double f2(double x);
+void unitTest();
+
+
+
 
 int main(void){
-	double x;
-	scanf("%lf", &x);
-	printf("%lf\n", f2(x));
+	unitTest();
 	return 0;
 }
