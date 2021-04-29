@@ -1,6 +1,10 @@
 CC = gcc
 FLAGS = -Wall -Wextra -Werror -m32
 
+
+all: main.o root.o test.o integral.o
+	$(CC) $(FLAGS) main.o integral.o root.o test.o -o area -lm
+
 f3.o: f3.asm
 	nasm -f elf32 f3.asm
 
@@ -26,3 +30,4 @@ test: main.o root.o test.o integral.o
 clean:
 	rm -f *.o
 	rm -f test
+	rm -f area
