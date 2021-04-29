@@ -1,10 +1,11 @@
 #include <math.h>
 #include <assert.h>
 #include <stdio.h>
+#include "funcs.h"
 
-double root(double (*f1)(double), double (*df1)(double), double (*f2)(double), double(*df2)(double),
-			double a, double b, double eps);
-
+/*
+ * Elementary functions for testing.
+*/
 double f_x(double x){
 	return x;
 }
@@ -47,29 +48,44 @@ double f_3(double x){
 	return -2 * (x + 1) / 3;
 }
 double df_3(double x){
-	return 0 * x - 2 / 3;
+	return 0 * x - 2.0 / 3;
 }
 
-
+/// test of "root" function.
 void rootTest(){
 	double eps = 1e-6;
 	double x = root(f_x, df_x,  f_lowerx, df_lowerx, 0.5, 20, eps);
-	assert(fabs(x - (1 / x)) < eps);
+	assert(fabs(x - (1 / x)) < eps && fabs(x-1) < eps);
 	x = root(f_x, df_x, f_sinx, df_sinx, -1, 1, eps);
-	assert(fabs(x - sin(x)) < eps);
+	assert(fabs(x - sin(x)) < eps && fabs(x) < eps);
 	x = root(f_lowerx, df_lowerx, df_ex, df_ex, 0.3, 13, eps);
 	assert(fabs(1 / x - exp(x)) < eps);
 	///
 	x = root(f_1, df_1, f_2, df_2, -1, -0.1, eps);
 	assert(fabs(exp(x) + 2 + 1 / x) < eps);
-	//x = root(f_2, df_2, f_3, df_3, -2.5, -1, eps);
-	//assert(fabs(-1 / x + 2*(x + 1) / 3) < eps);
-	x = root(f_3, df_3, f_1, df_1, -6, -2, eps);
-	//assert(fabs(exp(x) + 2  + 2*(x+1) / 3) < eps);
-	printf("%.9lf\n", x);
+	x = root(f_2, df_2, f_3, df_3, -2.5, -1, eps);
+	assert(fabs(-1 / x + 2*(x + 1) / 3) < eps);
+	x = root(f_3, df_3, f_1, df_1, -5, -3, eps);
+	assert(fabs(exp(x) + 2  + 2*(x+1) / 3) < eps);
 	printf("Root test: successful!\n");
 }
 
+///test of "integral" function.
+void integralTest(){
+	double eps = 1e-6;
+	double I = integral(f_x, 0, 1, eps);
+	assert(fabs(I - 0.5) < eps);
+	I = integral(f_sinx, 0, M_PI, eps);
+	assert(fabs(I - 2) < eps);
+	I = integral(f_lowerx, 1, M_E, eps);
+	assert(fabs(I - 1) < eps);
+	I = integral(f_ex, 0, M_LN10, eps);
+	assert(fabs(I - 9) < eps);
+	printf("Integral test: successful!\n");
+} 
+
+
 void unitTest(){
 	rootTest();
+	integralTest();
 }
