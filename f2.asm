@@ -1,8 +1,8 @@
-;f_3(x) -1 / x
+;f_2(x) -1 / x
 
 section .text
-global f3
-f3:
+global f2
+f2:
     push ebp
     mov ebp, esp
     finit

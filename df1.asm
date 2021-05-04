@@ -1,7 +1,6 @@
-;f1 = e^x + 2
 section .text
-global f1
-f1:
+global df1
+df1:; -exp(-x)
     push ebp
     mov ebp, esp
     finit   
@@ -22,10 +21,6 @@ f1:
     f2xm1
     fld1
     fadd
-    fmul
-    fld1
-    fadd
-    fld1
-    faddp
+    fmulp
     leave
     ret

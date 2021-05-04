@@ -1,14 +1,14 @@
-; 2(x-1) / 3
+; -2(x+1) / 3
 
 section .text
-global f2
-f2:
+global f3
+f3:
     push ebp
     mov ebp, esp
     finit
     fld1
     fld qword[ebp+8]
-    fsub
+    fadd
     push dword 2
     fld dword[esp]
     add esp, 4
