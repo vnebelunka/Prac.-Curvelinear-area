@@ -95,3 +95,64 @@ void unitTest(){
 	rootTest();
 	integralTest();
 }
+
+
+void mTest(){
+	int key = -1;
+	printf("Print num of part u want to test: \"1\" for root and \"2\" for integral:\t");
+	scanf("%d", &key);
+	if(key == 1){
+		unsigned numfunc = 0;
+		printf("U can test this functions:\n1:\t1/x = x\n2:\tsin(x) = x\n3:\t1/x = sin(x)\n4:\t1/x = e^x\n");
+		printf("Print num of function u want to test: ");
+		scanf("%d", &numfunc);
+		double s1, s2, eps;
+		printf("Print interval, where function will try to find root: ");
+		scanf("%lf %lf", &s1, &s2);
+		printf("Print accuracy for function: ");
+		scanf("%lf", &eps);
+		switch(numfunc){
+			case 1:
+				printf("Root is: %.9lf\n", root(f_x, df_x, f_lowerx, df_lowerx, s1,s2,eps));
+				break;
+			case 2:
+				printf("Root is: %.9lf\n", root(f_x, df_x, f_sinx, df_sinx, s1,s2,eps));
+				break;
+			case 3:
+				printf("Root is: %.9lf\n", root(f_sinx, df_sinx, f_lowerx, df_lowerx, s1,s2,eps));
+				break;
+			case 4:
+				printf("Root is: %.9lf\n", root(f_ex, df_ex, f_lowerx, df_lowerx, s1,s2,eps));
+				break;
+			default:
+				printf("There is no functions with this num!\n");
+		}
+	}
+	if(key == 2){
+		unsigned numfunc = 0;
+		printf("U can test this functions:\n1:\tf(x) = x\n2:\tf(x) = sin(x)\n3:\tf(x) = 1/x\n4:\tf(x) = e^x\n");
+		printf("Print num of function u want to test: ");
+		scanf("%d", &numfunc);
+		double s1, s2, eps;
+		printf("Print borders, where function will try to find integral: ");
+		scanf("%lf %lf", &s1, &s2);
+		printf("Print accuracy for function: ");
+		scanf("%lf", &eps);
+		switch(numfunc){
+			case 1:
+				printf("Integral is: %.9lf\n", integral(f_x, s1, s2, eps));
+				break;
+			case 2:
+				printf("Integral is: %.9lf\n", integral(f_sinx, s1, s2, eps));
+				break;
+			case 3:
+				printf("Integral is: %.9lf\n", integral(f_lowerx, s1, s2, eps));
+				break;
+			case 4:
+				printf("Integral is: %.9lf\n", integral(f_ex, s1, s2, eps));
+				break;
+			default:
+				printf("There is no functions with this num!\n");
+		}
+	}
+}
