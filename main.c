@@ -12,18 +12,27 @@ int main(int argc, char **argv){
 	int flagroots = 0, flagiters = 0;
 	if(argc){
 		for(int arg = 0; arg < argc; ++arg){
-			if(strcmp("-iters", argv[arg]) == 0)
+			if(strcmp("-iters", argv[arg]) == 0){
 				flagiters = 1;
-			if(strcmp("-roots", argv[arg]) == 0)
+			}
+			if(strcmp("-roots", argv[arg]) == 0){
 				flagroots = 1;
-			if(strcmp("-test", argv[arg]) == 0)
+			}
+			if(strcmp("-test", argv[arg]) == 0){
 				unitTest();
-			if(strcmp("-mtest", argv[arg]) == 0)
+				return 0;
+			}
+			if(strcmp("-mtest", argv[arg]) == 0){
 				mTest();
-			if(strcmp("-help", argv[arg]) == 0)
+				return 0;
+			}
+			if(strcmp("-help", argv[arg]) == 0){
 				help();
+				return 0;
+			}
 			if(strcmp("-ifuncs", argv[arg]) == 0){
 				printf("f1:\t exp(x) + 2\nf2:\t-1/x\nf3:\t-2(x+1)/3\n");
+				return 0;
 			}
 		}
 	}
