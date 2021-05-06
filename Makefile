@@ -4,7 +4,6 @@ FLAGS = -Wall -Wextra -Werror -m32
 
 all: main.o root.o test.o integral.o f1.o df1.o f2.o df2.o f3.o df3.o
 	$(CC) $(FLAGS) main.o integral.o root.o test.o  f1.o df1.o f2.o df2.o f3.o df3.o -o area -lm
-	./area -help
 
 f3.o: f3.asm
 	nasm -f elf32 f3.asm
