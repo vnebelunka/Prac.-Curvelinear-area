@@ -1,9 +1,10 @@
 CC = gcc
 FLAGS = -Wall -Wextra -Werror -m32
 
+all: area
 
-all: main.o root.o test.o integral.o f1.o df1.o f2.o df2.o f3.o df3.o
-	$(CC) $(FLAGS) main.o integral.o root.o test.o  f1.o df1.o f2.o df2.o f3.o df3.o -o area -lm
+area: main.o root.o test.o integral.o f1.o df1.o f2.o df2.o f3.o df3.o
+	$(CC) $(FLAGS) main.o integral.o root.o test.o  f1.o df1.o f2.o df2.o f3.o df3.o -lm -o area
 
 f3.o: f3.asm
 	nasm -f elf32 f3.asm
@@ -35,8 +36,8 @@ root.o: root.c funcs.h
 test.o: test.c funcs.h
 	$(CC) $(FLAGS) test.c -c
 
-test: main.o root.o test.o integral.o
-	$(CC) $(FLAGS) main.o integral.o root.o test.o -o test -lm
+test: main.o root.o test.o integral.o f1.o df1.o f2.o df2.o f3.o df3.o
+	$(CC) $(FLAGS) main.o integral.o root.o test.o f1.o df1.o f2.o df2.o f3.o df3.o -o test -lm
 	./test
 
 clean:
