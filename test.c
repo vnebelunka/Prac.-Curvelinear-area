@@ -51,16 +51,26 @@ double df_3(double x){
 	return 0 * x - 2.0 / 3;
 }
 
+double f_sqr(double x){
+	return x*x + x - 6;
+}
+double df_sqr(double x){
+	return 2*x + 1;
+}
+
+
 /// test of "root" function.
 void rootTest(){
 	double eps = 1e-6;
 	double x = root(f_x, df_x,  f_lowerx, df_lowerx, 0.5, 20, eps);
 	printf("function root: %.9lf; real root: %.9lf\n", x, 1.0);
 	assert(fabs(x - (1 / x)) < eps && fabs(x-1) < eps);
-	x = root(f_x, df_x, f_sinx, df_sinx, -1, 1, eps);
-	printf("function root: %.9lf; real root: %.9lf\n", x, 0.0);
-	assert(fabs(x - sin(x)) < eps && fabs(x) < eps);
+	x = root(f_x, df_x, f_sqr, df_sqr, -0.3, 10, eps);
+	printf("function root: %.9lf; real root: %.9lf\t", x, sqrt(6));
+	printf("eps = %.9lf\n", x -sqrt(6));
+	assert(fabs(x - sqrt(6))< eps);
 	x = root(f_lowerx, df_lowerx, df_ex, df_ex, 0.3, 13, eps);
+	printf("function root e^x - 1/x: %.9lf\n", x);
 	assert(fabs(1 / x - exp(x)) < eps);
 	///
 	x = root(f_1, df_1, f_2, df_2, -1, -0.1, eps);
